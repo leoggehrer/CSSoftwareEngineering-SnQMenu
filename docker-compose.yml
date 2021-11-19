@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  snqmenu.webapi:
+    image: "snqmenuwebapi"
+    container_name: snqmenu.webapi
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_CONNECTIONSTRING=Server=host.docker.internal,14330; Database=SnQMenuDb; User Id=sa;Password=passme!1234
+    ports:
+      - "34795:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  snqmenu.aspmvc:
+    image: "snqmenuaspmvc"
+    container_name: snqmenu.aspmvc
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_CONNECTIONSTRING=Server=host.docker.internal,14330; Database=SnQMenuDb; User Id=sa;Password=passme!1234
+    ports:
+      - "34800:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

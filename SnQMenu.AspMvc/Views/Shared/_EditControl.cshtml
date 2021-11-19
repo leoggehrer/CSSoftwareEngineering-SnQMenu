@@ -1,0 +1,41 @@
+﻿@*@CodeCopy*@
+@{
+    @using CommonBase.Extensions
+    @model SnQMenu.AspMvc.Models.IdentityModel
+
+    var viewBagWrapper = Model.ViewBagInfo;
+    var property = viewBagWrapper.DisplayProperty;
+    var mappingProperty = default(System.Reflection.PropertyInfo);
+    var editViewModel = viewBagWrapper.CreateEditViewModel(Model);
+
+    @if (property.CanRead && property.CanWrite)
+    {
+        @if (property.PropertyType == typeof(SelectList) && viewBagWrapper.GetMappingProperty(property.Name, out mappingProperty))
+        {
+            @Html.DropDownList(editViewModel.GetName(mappingProperty), editViewModel.GetValue(property) as SelectList, null, new { @class = "form-control", style = "min-width: 400px;" })
+        }
+        else if (property.PropertyType.IsEnum)
+        {
+            @Html.DropDownList(editViewModel.GetName(property), Html.GetEnumSelectList(property.PropertyType), editViewModel.GetDisplayValue(property), new { @class = "form-control" })
+        }
+        else
+        {
+            <input class="form-control" type="text" id="@editViewModel.GetId(property)" name="@editViewModel.GetName(property)" value="@editViewModel.GetValue(property)" />
+            <span class="text-danger field-validation-valid" data-valmsg-for="@editViewModel.GetName(property)" data-valmsg-replace="true"></span>
+        }
+    }
+    else if (property.CanRead)
+    {
+        @if (property.PropertyType == typeof(SelectList) && viewBagWrapper.GetMappingProperty(property.Name, out mappingProperty))
+        {
+            @Html.DropDownList(editViewModel.GetName(mappingProperty), editViewModel.GetValue(property) as SelectList, null, new { @class = "form-control", style = "min-width: 400px;" })
+        }
+        else
+        {
+            <div class="form-group">
+                <input class="form-control" type="text" id="@editViewModel.GetId(property)" name="@editViewModel.GetName(property)" value="@editViewModel.GetValue(property)" readonly="readonly" />
+            </div>
+        }
+    }
+    viewBagWrapper.Handled = true;
+}

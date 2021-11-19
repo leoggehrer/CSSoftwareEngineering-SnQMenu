@@ -1,0 +1,97 @@
+﻿@*@CodeCopy*@
+@*#if ACCOUNT_ON*@
+@{
+    @using Microsoft.AspNetCore.Mvc.Rendering
+    @using SnQMenu.AspMvc.Modules.Session
+    @using SnQMenu.AspMvc.Modules.Language
+    @using SnQMenu.AspMvc.Modules.View
+    @model IEnumerable<SnQMenu.AspMvc.Models.Business.Account.AppAccess>
+
+    var viewBagWrapper = new ViewBagWrapper(ViewBag);
+    var sessionWrapper = new SessionWrapper(Context.Session);
+
+    viewBagWrapper.Translate = Translator.TranslateIt;
+    viewBagWrapper.Controller = ViewContext.RouteData.Values["controller"].ToString();
+    viewBagWrapper.Action = ViewContext.RouteData.Values["action"].ToString();
+    viewBagWrapper.ViewType = Model != null ? Model.GetType() : null;
+
+    ViewData["Title"] = viewBagWrapper.Title;
+    <h1>@viewBagWrapper.Title</h1>
+
+    @if (sessionWrapper.IsAuthenticated && sessionWrapper.HasRole("SysAdmin", "AppAdmin"))
+    {
+        <div class="d-flex bg-transparent">
+            <div class="mr-auto p-sm-2">
+                <a asp-action="Create" class="btn btn-outline-secondary">@viewBagWrapper.TranslateFor("Create New")</a>
+            </div>
+            <div class="p-sm-2">
+                <a asp-action="Export" class="btn btn-outline-secondary">@viewBagWrapper.TranslateFor("Export")</a>
+            </div>
+            <div class="p-sm-2">
+                <a asp-action="Import" class="btn btn-outline-primary">@viewBagWrapper.TranslateFor("Import")</a>
+            </div>
+        </div>
+    }
+    <p></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @viewBagWrapper.TranslateFor(Html.DisplayNameFor(model => model.OneItem.Name))
+                </th>
+                <th>
+                    @viewBagWrapper.TranslateFor(Html.DisplayNameFor(model => model.OneItem.Email))
+                </th>
+                <th>
+                    @viewBagWrapper.TranslateFor(Html.DisplayNameFor(model => model.OneItem.EnableJwtAuth))
+                </th>
+                <th>
+                    @viewBagWrapper.TranslateFor(Html.DisplayNameFor(model => model.ManyItems))
+                </th>
+                <th>
+                    @viewBagWrapper.TranslateFor(Html.DisplayNameFor(model => model.OneItem.AccessFailedCount))
+                </th>
+                <th>
+                    @viewBagWrapper.TranslateFor(Html.DisplayNameFor(model => model.OneItem.State))
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                item.ViewBagInfo = viewBagWrapper;
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OneItem.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OneItem.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OneItem.EnableJwtAuth)
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach (var role in item.ManyItems)
+                            {
+                                <li>@role.Designation</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OneItem.AccessFailedCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OneItem.State)
+                    </td>
+                    <td>
+                        @await Html.PartialAsync("_CommandControl", item)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@*#endif*@

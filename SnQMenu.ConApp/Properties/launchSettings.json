@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "SnQMenu.ConApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

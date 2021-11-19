@@ -1,0 +1,20 @@
+﻿@*@CodeCopy*@
+@{
+    @model SnQMenu.AspMvc.Models.IdentityModel
+
+    var viewBagWrapper = Model.ViewBagInfo;
+    var editViewModel = viewBagWrapper.CreateEditViewModel(Model);
+
+    @foreach (var property in editViewModel.GetHiddenProperties())
+    {
+        <input type="hidden" id="@editViewModel.GetId(property)" name="@editViewModel.GetName(property)" value="@editViewModel.GetDisplayValue(property)" />
+    }
+
+    @foreach (var item in editViewModel.GetDisplayProperties())
+    {
+        Model.ViewBagInfo.Handled = false;
+        Model.ViewBagInfo.DisplayProperty = item;
+        @await Html.PartialAsync("_EditGroup", Model)
+    }
+}
+

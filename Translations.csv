@@ -1,0 +1,52 @@
+﻿Id;AppName;KeyLanguage;Key;ValueLanguage;Value
+0;SnQMenu;En;PortalMenu.Home;De;Home
+0;SnQMenu;En;PortalMenu.Privacy;De;Privat
+0;SnQMenu;En;LoginMenu.Logon;De;Anmelden
+0;SnQMenu;En;LoginMenu.Logout;De;Abmelden
+0;SnQMenu;En;LoginMenu.Access-Authorization;De;Zugriffe
+0;SnQMenu;En;LoginMenu.Identity-User;De;Benutzer
+0;SnQMenu;En;LoginMenu.Role-Management;De;Role-Verwaltung
+0;SnQMenu;En;LoginMenu.Change password;De;Kennwort ändern
+0;SnQMenu;En;LoginMenu.Reset password;De;Kennwort zurücksetzen
+0;SnQMenu;En;Account.Logon;De;Anmeldung
+0;SnQMenu;En;Please provide your user credentials to proceed:;De;Geben Sie bitte die Benutzerdaten ein
+0;SnQMenu;En;Forgot your password?;De;Kennwort vergessen?
+0;SnQMenu;En;Account.Email;De;Email
+0;SnQMenu;En;Account.Password;De;Kennwort
+0;SnQMenu;En;AppAccesses.AppAccesses;De;Zugriffe
+0;SnQMenu;En;AppAccesses.Create New;De;Eintrag erstellen
+0;SnQMenu;En;AppAccesses.Export;De;Export
+0;SnQMenu;En;AppAccesses.Import;De;Import
+0;SnQMenu;En;AppAccesses.Name;De;Name
+0;SnQMenu;En;AppAccesses.Email;De;Email
+0;SnQMenu;En;AppAccesses.EnableJwtAuth;De;Jwt-Freigabe
+0;SnQMenu;En;AppAccesses.ManyItems;De;ManyItems
+0;SnQMenu;En;AppAccesses.AccessFailedCount;De;Falsche Anmeldungen
+0;SnQMenu;En;AppAccesses.State;De;State
+0;SnQMenu;En;AppAccesses.Edit;De;Bearbeiten
+0;SnQMenu;En;AppAccesses.Delete;De;Löschen
+0;SnQMenu;En;IdentityUsers.IdentityUsers;De;Benutzer
+0;SnQMenu;En;IdentityUsers.Create New;De;Eintrag erstellen
+0;SnQMenu;En;IdentityUsers.Export;De;Export
+0;SnQMenu;En;IdentityUsers.Import;De;Import
+0;SnQMenu;En;IdentityUsers.Name;De;Name
+0;SnQMenu;En;IdentityUsers.Email;De;Email
+0;SnQMenu;En;IdentityUsers.Lastname;De;Nachname
+0;SnQMenu;En;IdentityUsers.Firstname;De;Vorname
+0;SnQMenu;En;IdentityUsers.EnableJwtAuth;De;
+0;SnQMenu;En;IdentityUsers.AccessFailedCount;De;Jwt-Freigabe
+0;SnQMenu;En;IdentityUsers.State;De;State
+0;SnQMenu;En;IdentityUsers.Edit;De;Bearbeiten
+0;SnQMenu;En;IdentityUsers.Delete;De;Löschen
+0;SnQMenu;En;Roles.Roles;De;Rolen
+0;SnQMenu;En;Roles.Create New;De;Eintrag erstellen
+0;SnQMenu;En;Roles.Designation;De;Bezeichnung
+0;SnQMenu;En;Roles.Description;De;Beschreibung
+0;SnQMenu;En;Account.ChangePassword;De;Kennwort ändern
+0;SnQMenu;En;You are logged in as;De;Angemeldet als
+0;SnQMenu;En;Account;De;Konto
+0;SnQMenu;En;Account.OldPassword;De;Altes Kennwort
+0;SnQMenu;En;Account.NewPassword;De;Neues Kennwort
+0;SnQMenu;En;Account.ConfirmPassword;De;Kennwort bestätigen
+0;SnQMenu;En;Account.ResetPassword;De;Kennwort zurücksetzen
+0;SnQMenu;En;Reset Password Form;De;Kennwort zurücksetzen

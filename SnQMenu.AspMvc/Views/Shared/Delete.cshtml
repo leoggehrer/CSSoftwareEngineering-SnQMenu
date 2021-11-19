@@ -1,0 +1,68 @@
+﻿@*@CodeCopy*@
+@{
+    @using CommonBase.Extensions
+    @using SnQMenu.AspMvc.Modules.Handler
+    @using SnQMenu.AspMvc.Modules.Language
+    @using SnQMenu.AspMvc.Modules.Session
+    @using SnQMenu.AspMvc.Modules.View
+    @using SnQMenu.AspMvc.Models.Modules.View
+    @model SnQMenu.AspMvc.Models.IdentityModel
+
+    var viewBagWrapper = new ViewBagWrapper(ViewBag);
+    var sessionWrapper = new SessionWrapper(Context.Session);
+
+    viewBagWrapper.Translate = Translator.TranslateIt;
+    viewBagWrapper.Controller = ViewContext.RouteData.Values["controller"].ToString();
+    viewBagWrapper.Action = ViewContext.RouteData.Values["action"].ToString();
+    viewBagWrapper.ViewType = Model.GetType();
+
+    Model.ViewBagInfo = viewBagWrapper;
+    ViewData["Title"] = viewBagWrapper.Title;
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="d-flex bg-transparent">
+        <div class="p-sm-2 mr-auto">
+            <h4>@viewBagWrapper.TranslateFor("Delete")</h4>
+        </div>
+    </div>
+    <hr />
+
+    @if (string.IsNullOrEmpty(ErrorHandler.LastViewError) == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ErrorHandler.GetLastViewErrorAndClear()
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @viewBagWrapper.TranslateFor("Should the entry be deleted?")
+        </div>
+    }
+
+    <form asp-action="Delete">
+        @if (Model.GetType().IsGenericTypeOf(typeof(OneToAnotherModel<,,,>)))
+        {
+            var oneProperty = Model.GetType().GetProperty("OneModel");
+            var oneModel = oneProperty?.GetValue(Model) as IdentityModel;
+            var anotherProperty = Model.GetType().GetProperty("AnotherModel");
+            var anotherModel = anotherProperty?.GetValue(Model) as IdentityModel;
+            var editViewModel = viewBagWrapper.CreateEditViewModel(oneModel);
+
+            viewBagWrapper.ItemPrefix = "OneModel";
+            oneModel.ViewBagInfo = viewBagWrapper;
+            @await Html.PartialAsync("_DisplayModel", oneModel)
+
+            viewBagWrapper.ItemPrefix = "AnotherModel";
+            anotherModel.ViewBagInfo = viewBagWrapper;
+            @await Html.PartialAsync("_DisplayModel", anotherModel)
+        }
+        else
+        {
+            Model.ViewBagInfo = viewBagWrapper;
+            @await Html.PartialAsync("_DisplayModel", Model)
+        }
+        <hr />
+        @await Html.PartialAsync("_SubmitBack", new SubmitBackCmd() { SubmitText = viewBagWrapper.TranslateFor("Delete"), BackText = viewBagWrapper.TranslateFor("Back to List"), SubmitCss = "btn btn-danger", FromSubmitToBack = true })
+    </form>
+}
