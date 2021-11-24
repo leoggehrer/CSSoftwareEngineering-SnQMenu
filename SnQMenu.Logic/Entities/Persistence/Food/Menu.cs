@@ -28,6 +28,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
             get;
             set;
         }
+        = System.Guid.NewGuid().ToString();
         public System.DateTime? From
         {
             get;

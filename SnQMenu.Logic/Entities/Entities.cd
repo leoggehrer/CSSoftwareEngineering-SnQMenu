@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SnQMenu.Logic.Entities.Persistence.MasterData.AvailableLanguage">
+    <Position X="2.75" Y="5.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAgFEAARAAAAAAANAgBAAEGAAEAAA=</HashCode>
+      <FileName>Entities\Persistence\MasterData\AvailableLanguage.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Restaurant" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SnQMenu.Logic.Entities.Persistence.MasterData.Restaurant">
+    <Position X="1" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAgABAgAAAAgFEAARAAAAAABNAgJAIAFAAAAAA=</HashCode>
+      <FileName>Entities\Persistence\MasterData\Restaurant.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="AvailableLanguages" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SnQMenu.Logic.Entities.Persistence.Food.MenuSection" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="5.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAARAAAAAAgABAAgFEAARQAAAAIBNAgBAAAFAAAAAA=</HashCode>
+      <FileName>Entities\Persistence\Food\MenuSection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Menu" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="MenuItems" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SnQMenu.Logic.Entities.Persistence.Food.MenuItem" BaseTypeListCollapsed="true">
+    <Position X="9" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAQAgAAAAglEAARQAAAAAANAgBAAAFAAAQEA=</HashCode>
+      <FileName>Entities\Persistence\Food\MenuItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MenuSection" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SnQMenu.Logic.Entities.Persistence.Food.Menu" BaseTypeListCollapsed="true">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IgAgAAAAAAAAAAAAgFEAARAAAAAIBNAgBAAEFAAEAEA=</HashCode>
+      <FileName>Entities\Persistence\Food\MenuInheritance.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Restaurant" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="MenuSections" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

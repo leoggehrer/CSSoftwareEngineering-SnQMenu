@@ -1,16 +1,11 @@
 ﻿using SnQMenu.Contracts.Modules.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SnQMenu.Contracts.Persistence.MasterData
 {
     [ContractInfo]
     public interface IRestaurant : IVersionable, ICopyable<IRestaurant>
     {
-        [ContractPropertyInfo(Required = true, MaxLength = 36)]
+        [ContractPropertyInfo(Required = true, MaxLength = 36, DefaultValue = "System.Guid.NewGuid().ToString()")]
         string Guid { get; }
         [ContractPropertyInfo(Required = true, IsUnique = true, MaxLength = 256)]
         string UniqueName { get; set; }

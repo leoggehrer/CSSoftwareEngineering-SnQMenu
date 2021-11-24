@@ -5,6 +5,11 @@ namespace SnQMenu.Logic.DataContext
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     partial class SnQMenuDbContext
     {
+        protected DbSet<Entities.Persistence.MasterData.AvailableLanguage> AvailableLanguageSet
+        {
+            get;
+            set;
+        }
         protected DbSet<Entities.Persistence.MasterData.Restaurant> RestaurantSet
         {
             get;
@@ -62,7 +67,11 @@ namespace SnQMenu.Logic.DataContext
         }
         partial void GetDbSet<C, E>(ref DbSet<E> dbSet) where E : class
         {
-            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
+            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IAvailableLanguage))
+            {
+                dbSet = AvailableLanguageSet as DbSet<E>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
             {
                 dbSet = RestaurantSet as DbSet<E>;
             }
@@ -109,6 +118,21 @@ namespace SnQMenu.Logic.DataContext
         }
         static partial void DoModelCreating(ModelBuilder modelBuilder)
         {
+            var availableLanguageBuilder = modelBuilder.Entity<Entities.Persistence.MasterData.AvailableLanguage>();
+            availableLanguageBuilder.ToTable("AvailableLanguage", "MasterData")
+            .HasKey("Id");
+            modelBuilder.Entity<Entities.Persistence.MasterData.AvailableLanguage>().Property(p => p.RowVersion).IsRowVersion();
+            availableLanguageBuilder.Property(p => p.Text)
+            .HasMaxLength(64);
+            availableLanguageBuilder
+            .HasIndex(c => new
+            {
+                c.RestaurantId
+                , c.LanguageCode
+            }
+            )
+            .IsUnique();
+            ConfigureEntityType(availableLanguageBuilder);
             var restaurantBuilder = modelBuilder.Entity<Entities.Persistence.MasterData.Restaurant>();
             restaurantBuilder.ToTable("Restaurant", "MasterData")
             .HasKey("Id");
@@ -149,6 +173,9 @@ namespace SnQMenu.Logic.DataContext
             .HasMaxLength(256);
             menuItemBuilder.Property(p => p.Description)
             .HasMaxLength(1024);
+            menuItemBuilder.Property(p => p.Guid)
+            .IsRequired()
+            .HasMaxLength(36);
             menuItemBuilder.Property(p => p.InternalName)
             .HasMaxLength(64);
             menuItemBuilder.Property(p => p.AllergenType)
@@ -158,6 +185,9 @@ namespace SnQMenu.Logic.DataContext
             menuSectionBuilder.ToTable("MenuSection", "Food")
             .HasKey("Id");
             modelBuilder.Entity<Entities.Persistence.Food.MenuSection>().Property(p => p.RowVersion).IsRowVersion();
+            menuSectionBuilder.Property(p => p.Guid)
+            .IsRequired()
+            .HasMaxLength(36);
             menuSectionBuilder.Property(p => p.Name)
             .IsRequired()
             .HasMaxLength(256);
@@ -258,6 +288,7 @@ namespace SnQMenu.Logic.DataContext
             .HasMaxLength(64);
             ConfigureEntityType(userBuilder);
         }
+        static partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.MasterData.AvailableLanguage> entityTypeBuilder);
         static partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.MasterData.Restaurant> entityTypeBuilder);
         static partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.Food.Menu> entityTypeBuilder);
         static partial void ConfigureEntityType(EntityTypeBuilder<Entities.Persistence.Food.MenuItem> entityTypeBuilder);

@@ -1,0 +1,22 @@
+﻿@*@CodeCopy*@
+@{
+    @using SnQMenu.AspMvc.Models.Modules.Common
+    @model SnQMenu.AspMvc.Models.IdentityModel
+
+    var viewBagWrapper = Model.ViewBagInfo;
+
+    if (Model.GetType() == typeof(SnQMenu.AspMvc.Models.Persistence.Food.Menu))
+    {
+        var cardAction = Url.Action("Index", "MenuCards", new { @guid = ((SnQMenu.AspMvc.Models.Persistence.Food.Menu)Model).Guid.ToString() });
+        var sectionAction = Url.Action("Index", "MenuMenuSections");
+
+        @await Html.PartialAsync("../Shared/_CommandControl", Model)
+
+        <a type="button" href="@cardAction" class="btn btn-outline-secondary btn-sm" style="margin: 0px 2px 2px 0px;" title="@viewBagWrapper.TranslateFor("MenuCards")"><i class="fa fa-address-book" aria-hidden="true"></i></a>
+        <a type="button" href="@sectionAction" class="btn btn-outline-secondary btn-sm" style="margin: 0px 2px 2px 0px;" title="@viewBagWrapper.TranslateFor("MenuSections")"><i class="fas fa-list" aria-hidden="true"></i></a>
+    }
+    else
+    {
+        @await Html.PartialAsync("../Shared/_CommandControl", Model)
+    }
+}

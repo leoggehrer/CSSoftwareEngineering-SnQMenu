@@ -23,6 +23,12 @@ namespace SnQMenu.Transfer.Models.Persistence.Food
             get;
             set;
         }
+        public System.String Guid
+        {
+            get;
+            set;
+        }
+        = System.Guid.NewGuid().ToString();
         public System.String Name
         {
             get;
@@ -62,6 +68,7 @@ namespace SnQMenu.Transfer.Models.Persistence.Food
                 Id = other.Id;
                 RowVersion = other.RowVersion;
                 MenuId = other.MenuId;
+                Guid = other.Guid;
                 Name = other.Name;
                 Description = other.Description;
                 ImageUrl = other.ImageUrl;

@@ -3,14 +3,17 @@
 using SnQMenu.AspMvc.Modules.View;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace SnQMenu.AspMvc.Models.Modules.View
 {
     public partial class IndexViewModel : ViewModel
     {
+        private Type modelType = null;
         public IEnumerable<IdentityModel> Models { get; init; }
-        public override Type ModelType => Models.GetType().GetGenericArguments()[0];
+        public override Type ModelType => modelType ??= Models.Any() ? Models.First().GetType() 
+                                                                     : Models.GetType().GetGenericArguments().FirstOrDefault(e => e.IsClass || e.IsInterface);
 
         public IndexViewModel(ViewBagWrapper viewBagWrapper, IEnumerable<IdentityModel> models)
             : base(viewBagWrapper)
@@ -18,6 +21,15 @@ namespace SnQMenu.AspMvc.Models.Modules.View
             models.CheckArgument(nameof(models));
 
             Models = models;
+        }
+        public IndexViewModel(ViewBagWrapper viewBagWrapper, IEnumerable<IdentityModel> models, Type elementType)
+            : base(viewBagWrapper)
+        {
+            models.CheckArgument(nameof(models));
+            elementType.CheckArgument(nameof(elementType));
+
+            Models = models;
+            modelType = elementType;
         }
 
         private IEnumerable<PropertyInfo> displayProperties = null;

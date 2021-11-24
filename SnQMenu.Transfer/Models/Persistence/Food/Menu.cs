@@ -28,6 +28,7 @@ namespace SnQMenu.Transfer.Models.Persistence.Food
             get;
             set;
         }
+        = System.Guid.NewGuid().ToString();
         public System.DateTime? From
         {
             get;

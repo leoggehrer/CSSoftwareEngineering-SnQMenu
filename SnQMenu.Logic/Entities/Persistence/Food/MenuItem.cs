@@ -33,6 +33,12 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
             get;
             set;
         }
+        public System.String Guid
+        {
+            get;
+            set;
+        }
+        = System.Guid.NewGuid().ToString();
         public System.String InternalName
         {
             get;
@@ -72,6 +78,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
                 Id = other.Id;
                 RowVersion = other.RowVersion;
                 MenuSectionId = other.MenuSectionId;
+                Guid = other.Guid;
                 InternalName = other.InternalName;
                 Name = other.Name;
                 Description = other.Description;
@@ -101,6 +108,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
             return IsEqualsWith(Name, other.Name)
             && IsEqualsWith(Description, other.Description)
             && MenuSectionId == other.MenuSectionId
+            && IsEqualsWith(Guid, other.Guid)
             && IsEqualsWith(InternalName, other.InternalName)
             && IsEqualsWith(AllergenType, other.AllergenType)
             && Price == other.Price
@@ -109,7 +117,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
         }
         public override int GetHashCode()
         {
-            return HashCode.Combine(Name, Description, MenuSectionId, InternalName, AllergenType, Price, HashCode.Combine(SortOrder, State));
+            return HashCode.Combine(Name, Description, MenuSectionId, Guid, InternalName, AllergenType, HashCode.Combine(Price, SortOrder, State));
         }
         public static Persistence.Food.MenuItem Create()
         {

@@ -1,9 +1,4 @@
 ﻿using SnQMenu.Contracts.Modules.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SnQMenu.Contracts.Persistence.Food
 {
@@ -11,6 +6,8 @@ namespace SnQMenu.Contracts.Persistence.Food
     public interface IMenuItem : IVersionable, ICopyable<IMenuItem>
     {
         int MenuSectionId { get; set; }
+        [ContractPropertyInfo(Required = true, MaxLength = 36, DefaultValue = "System.Guid.NewGuid().ToString()")]
+        string Guid { get; }
         [ContractPropertyInfo(MaxLength = 64)]
         string InternalName { get; set; }
         [ContractPropertyInfo(Required = true, MaxLength = 256, Order = 1_000)]

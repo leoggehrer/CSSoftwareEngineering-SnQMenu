@@ -28,6 +28,7 @@ namespace SnQMenu.AspMvc.Models.Persistence.Food
             get;
             set;
         }
+        = System.Guid.NewGuid().ToString();
         public System.DateTime? From
         {
             get;

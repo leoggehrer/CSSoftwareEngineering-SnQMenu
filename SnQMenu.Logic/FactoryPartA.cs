@@ -5,7 +5,11 @@ namespace SnQMenu.Logic
     {
         static partial void CreateController<C>(ref Contracts.Client.IControllerAccess<C> controller) where C : Contracts.IIdentifiable
         {
-            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
+            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IAvailableLanguage))
+            {
+                controller = new Controllers.Persistence.MasterData.AvailableLanguageController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
             {
                 controller = new Controllers.Persistence.MasterData.RestaurantController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
             }
@@ -49,6 +53,26 @@ namespace SnQMenu.Logic
             {
                 controller = new Controllers.Persistence.Account.UserController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
             }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.MasterData.IRestaurantLanguages))
+            {
+                controller = new Controllers.Business.MasterData.RestaurantLanguagesController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.MasterData.IRestaurantMenues))
+            {
+                controller = new Controllers.Business.MasterData.RestaurantMenuesController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuCard))
+            {
+                controller = new Controllers.Business.Food.MenuCardController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuMenuSections))
+            {
+                controller = new Controllers.Business.Food.MenuMenuSectionsController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuSectionMenuItems))
+            {
+                controller = new Controllers.Business.Food.MenuSectionMenuItemsController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
+            }
             else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Account.IAppAccess))
             {
                 controller = new Controllers.Business.Account.AppAccessController(CreateContext()) as Contracts.Client.IControllerAccess<C>;
@@ -64,7 +88,11 @@ namespace SnQMenu.Logic
         }
         static partial void CreateController<C>(object sharedController, ref Contracts.Client.IControllerAccess<C> controller) where C : Contracts.IIdentifiable
         {
-            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
+            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IAvailableLanguage))
+            {
+                controller = new Controllers.Persistence.MasterData.AvailableLanguageController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
             {
                 controller = new Controllers.Persistence.MasterData.RestaurantController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
             }
@@ -108,6 +136,26 @@ namespace SnQMenu.Logic
             {
                 controller = new Controllers.Persistence.Account.UserController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
             }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.MasterData.IRestaurantLanguages))
+            {
+                controller = new Controllers.Business.MasterData.RestaurantLanguagesController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.MasterData.IRestaurantMenues))
+            {
+                controller = new Controllers.Business.MasterData.RestaurantMenuesController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuCard))
+            {
+                controller = new Controllers.Business.Food.MenuCardController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuMenuSections))
+            {
+                controller = new Controllers.Business.Food.MenuMenuSectionsController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuSectionMenuItems))
+            {
+                controller = new Controllers.Business.Food.MenuSectionMenuItemsController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
+            }
             else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Account.IAppAccess))
             {
                 controller = new Controllers.Business.Account.AppAccessController(sharedController as Controllers.ControllerObject) as Contracts.Client.IControllerAccess<C>;
@@ -124,7 +172,15 @@ namespace SnQMenu.Logic
 #if ACCOUNT_ON
         public static void CreateController<C>(string sessionToken, ref Contracts.Client.IControllerAccess<C> controller) where C : Contracts.IIdentifiable
         {
-            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
+            if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IAvailableLanguage))
+            {
+                controller = new Controllers.Persistence.MasterData.AvailableLanguageController(CreateContext())
+                {
+                    SessionToken = sessionToken
+                }
+                as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.MasterData.IRestaurant))
             {
                 controller = new Controllers.Persistence.MasterData.RestaurantController(CreateContext())
                 {
@@ -207,6 +263,46 @@ namespace SnQMenu.Logic
             else if (typeof(C) == typeof(SnQMenu.Contracts.Persistence.Account.IUser))
             {
                 controller = new Controllers.Persistence.Account.UserController(CreateContext())
+                {
+                    SessionToken = sessionToken
+                }
+                as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.MasterData.IRestaurantLanguages))
+            {
+                controller = new Controllers.Business.MasterData.RestaurantLanguagesController(CreateContext())
+                {
+                    SessionToken = sessionToken
+                }
+                as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.MasterData.IRestaurantMenues))
+            {
+                controller = new Controllers.Business.MasterData.RestaurantMenuesController(CreateContext())
+                {
+                    SessionToken = sessionToken
+                }
+                as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuCard))
+            {
+                controller = new Controllers.Business.Food.MenuCardController(CreateContext())
+                {
+                    SessionToken = sessionToken
+                }
+                as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuMenuSections))
+            {
+                controller = new Controllers.Business.Food.MenuMenuSectionsController(CreateContext())
+                {
+                    SessionToken = sessionToken
+                }
+                as Contracts.Client.IControllerAccess<C>;
+            }
+            else if (typeof(C) == typeof(SnQMenu.Contracts.Business.Food.IMenuSectionMenuItems))
+            {
+                controller = new Controllers.Business.Food.MenuSectionMenuItemsController(CreateContext())
                 {
                     SessionToken = sessionToken
                 }

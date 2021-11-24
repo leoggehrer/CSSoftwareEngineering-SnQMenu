@@ -23,6 +23,12 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
             get;
             set;
         }
+        public System.String Guid
+        {
+            get;
+            set;
+        }
+        = System.Guid.NewGuid().ToString();
         public System.String Name
         {
             get;
@@ -62,6 +68,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
                 Id = other.Id;
                 RowVersion = other.RowVersion;
                 MenuId = other.MenuId;
+                Guid = other.Guid;
                 Name = other.Name;
                 Description = other.Description;
                 ImageUrl = other.ImageUrl;
@@ -87,6 +94,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
                 return false;
             }
             return MenuId == other.MenuId
+            && IsEqualsWith(Guid, other.Guid)
             && IsEqualsWith(Name, other.Name)
             && IsEqualsWith(Description, other.Description)
             && IsEqualsWith(ImageUrl, other.ImageUrl)
@@ -95,7 +103,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
         }
         public override int GetHashCode()
         {
-            return HashCode.Combine(MenuId, Name, Description, ImageUrl, SortOrder, State);
+            return HashCode.Combine(MenuId, Guid, Name, Description, ImageUrl, SortOrder, HashCode.Combine(State));
         }
         public static Persistence.Food.MenuSection Create()
         {

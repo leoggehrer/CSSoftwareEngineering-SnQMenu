@@ -23,6 +23,7 @@ namespace SnQMenu.AspMvc.Models.Persistence.MasterData
             get;
             set;
         }
+        = System.Guid.NewGuid().ToString();
         public System.String UniqueName
         {
             get;

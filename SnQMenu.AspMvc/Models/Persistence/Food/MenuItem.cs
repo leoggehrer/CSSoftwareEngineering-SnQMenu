@@ -33,6 +33,12 @@ namespace SnQMenu.AspMvc.Models.Persistence.Food
             get;
             set;
         }
+        public System.String Guid
+        {
+            get;
+            set;
+        }
+        = System.Guid.NewGuid().ToString();
         public System.String InternalName
         {
             get;
@@ -72,6 +78,7 @@ namespace SnQMenu.AspMvc.Models.Persistence.Food
                 Id = other.Id;
                 RowVersion = other.RowVersion;
                 MenuSectionId = other.MenuSectionId;
+                Guid = other.Guid;
                 InternalName = other.InternalName;
                 Name = other.Name;
                 Description = other.Description;

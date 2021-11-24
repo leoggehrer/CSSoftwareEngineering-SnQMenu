@@ -1,4 +1,4 @@
-﻿@*@CodeCopy*@
+﻿@*@Customized*@
 @{
     @using SnQMenu.AspMvc.Modules.Session
     @using SnQMenu.AspMvc.Modules.Language
@@ -11,11 +11,23 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@translateFor("Home")</a>
         </li>
-@*#if ACCOUNT_ON*@
+        @*#if ACCOUNT_ON*@
         @if (sessionWrapper.LoginSession != null)
         {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="RestaurantLanguages" asp-action="Index">@translateFor("Restaurants")</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="RestaurantMenues" asp-action="Index">@translateFor("Menues")</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="MenuMenuSections" asp-action="Index">@translateFor("MenuSections")</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="MenuSectionMenuItems" asp-action="Index">@translateFor("MenuItems")</a>
+            </li>
         }
-@*#endif*@
+        @*#endif*@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">@translateFor("Contact")</a>
         </li>
