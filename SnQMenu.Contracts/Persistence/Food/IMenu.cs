@@ -7,8 +7,8 @@ namespace SnQMenu.Contracts.Persistence.Food
     public interface IMenu : IVersionable, ICopyable<IMenu>
     {
         int RestaurantId { get; set; }
-        [ContractPropertyInfo(Required = true, MaxLength = 36, DefaultValue = "System.Guid.NewGuid().ToString()")]
-        string Guid { get; }
+        [ContractPropertyInfo(Required = true, DefaultValueSql = "NEWID()")]
+        Guid Guid { get; }
         DateTime? From { get; set; }
         DateTime? To { get; set; }
         [ContractPropertyInfo(MaxLength = 1024)]

@@ -23,12 +23,11 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
             get;
             set;
         }
-        public System.String Guid
+        public System.Guid Guid
         {
             get;
             set;
         }
-        = System.Guid.NewGuid().ToString();
         public System.DateTime? From
         {
             get;
@@ -95,7 +94,7 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
                 return false;
             }
             return RestaurantId == other.RestaurantId
-            && IsEqualsWith(Guid, other.Guid)
+            && Guid == other.Guid
             && From == other.From
             && To == other.To
             && IsEqualsWith(Notes, other.Notes)

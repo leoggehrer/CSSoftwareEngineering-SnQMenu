@@ -1,0 +1,14 @@
+﻿@*@CustomerCode*@
+@{
+    @model SnQMenu.AspMvc.Models.IdentityModel
+
+    var viewBagWrapper = Model.ViewBagInfo;
+
+    @await Html.PartialAsync("../Shared/_CommandControl", Model)
+    if (Model is SnQMenu.AspMvc.Models.Persistence.MasterData.Restaurant restaurant)
+    {
+        var menuAction = Url.Action("Details", "RestaurantMenues", new { id = restaurant.Id });
+
+        <a type="button" href="@menuAction" class="btn btn-outline-secondary" style="margin: 0px 2px 2px 0px;" title="@viewBagWrapper.TranslateFor("RestaurantMenues")"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+    }
+}

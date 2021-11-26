@@ -23,23 +23,22 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
             get;
             set;
         }
-        public System.String Guid
+        public System.Guid Guid
         {
             get;
             set;
         }
-        = System.Guid.NewGuid().ToString();
+        public System.String ImageUrl
+        {
+            get;
+            set;
+        }
         public System.String Name
         {
             get;
             set;
         }
         public System.String Description
-        {
-            get;
-            set;
-        }
-        public System.String ImageUrl
         {
             get;
             set;
@@ -69,9 +68,9 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
                 RowVersion = other.RowVersion;
                 MenuId = other.MenuId;
                 Guid = other.Guid;
+                ImageUrl = other.ImageUrl;
                 Name = other.Name;
                 Description = other.Description;
-                ImageUrl = other.ImageUrl;
                 SortOrder = other.SortOrder;
                 State = other.State;
             }
@@ -94,16 +93,16 @@ namespace SnQMenu.Logic.Entities.Persistence.Food
                 return false;
             }
             return MenuId == other.MenuId
-            && IsEqualsWith(Guid, other.Guid)
+            && Guid == other.Guid
+            && IsEqualsWith(ImageUrl, other.ImageUrl)
             && IsEqualsWith(Name, other.Name)
             && IsEqualsWith(Description, other.Description)
-            && IsEqualsWith(ImageUrl, other.ImageUrl)
             && SortOrder == other.SortOrder
             && State == other.State;
         }
         public override int GetHashCode()
         {
-            return HashCode.Combine(MenuId, Guid, Name, Description, ImageUrl, SortOrder, HashCode.Combine(State));
+            return HashCode.Combine(MenuId, Guid, ImageUrl, Name, Description, SortOrder, HashCode.Combine(State));
         }
         public static Persistence.Food.MenuSection Create()
         {

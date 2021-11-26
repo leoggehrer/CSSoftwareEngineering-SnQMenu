@@ -1,5 +1,6 @@
 ﻿@*@CodeCopy*@
 @{
+    @using SnQMenu.AspMvc.Models.Modules.Common;
     @using SnQMenu.AspMvc.Models.Modules.View
     @using SnQMenu.AspMvc.Modules.Handler
     @using SnQMenu.AspMvc.Modules.Language
@@ -24,9 +25,12 @@
         {
             indexViewModel = viewBagWrapper.CreateIndexViewModel(models);
         }
+        viewBagWrapper.ModelType = ModelType.MasterDetail;
+        viewBagWrapper.CommandMode |= SnQMenu.AspMvc.Models.Modules.Common.CommandMode.CreateDetail;
     }
     else
     {
+        viewBagWrapper.ModelType = ModelType.Single;
         indexViewModel = viewBagWrapper.CreateIndexViewModel(Model);
     }
 

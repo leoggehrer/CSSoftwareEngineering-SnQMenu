@@ -18,12 +18,16 @@ namespace SnQMenu.Logic.Entities.Persistence.MasterData
         }
         partial void Constructing();
         partial void Constructed();
-        public System.String Guid
+        public System.Guid Guid
         {
             get;
             set;
         }
-        = System.Guid.NewGuid().ToString();
+        public System.String ImageUrl
+        {
+            get;
+            set;
+        }
         public System.String UniqueName
         {
             get;
@@ -63,6 +67,7 @@ namespace SnQMenu.Logic.Entities.Persistence.MasterData
                 Id = other.Id;
                 RowVersion = other.RowVersion;
                 Guid = other.Guid;
+                ImageUrl = other.ImageUrl;
                 UniqueName = other.UniqueName;
                 DisplayName = other.DisplayName;
                 Description = other.Description;
@@ -87,7 +92,8 @@ namespace SnQMenu.Logic.Entities.Persistence.MasterData
             {
                 return false;
             }
-            return IsEqualsWith(Guid, other.Guid)
+            return Guid == other.Guid
+            && IsEqualsWith(ImageUrl, other.ImageUrl)
             && IsEqualsWith(UniqueName, other.UniqueName)
             && IsEqualsWith(DisplayName, other.DisplayName)
             && IsEqualsWith(Description, other.Description)
@@ -96,7 +102,7 @@ namespace SnQMenu.Logic.Entities.Persistence.MasterData
         }
         public override int GetHashCode()
         {
-            return HashCode.Combine(Guid, UniqueName, DisplayName, Description, WebsiteText, State);
+            return HashCode.Combine(Guid, ImageUrl, UniqueName, DisplayName, Description, WebsiteText, HashCode.Combine(State));
         }
         public static Persistence.MasterData.Restaurant Create()
         {

@@ -33,12 +33,16 @@ namespace SnQMenu.AspMvc.Models.Persistence.Food
             get;
             set;
         }
-        public System.String Guid
+        public System.Guid Guid
         {
             get;
             set;
         }
-        = System.Guid.NewGuid().ToString();
+        public System.String ImageUrl
+        {
+            get;
+            set;
+        }
         public System.String InternalName
         {
             get;
@@ -79,6 +83,7 @@ namespace SnQMenu.AspMvc.Models.Persistence.Food
                 RowVersion = other.RowVersion;
                 MenuSectionId = other.MenuSectionId;
                 Guid = other.Guid;
+                ImageUrl = other.ImageUrl;
                 InternalName = other.InternalName;
                 Name = other.Name;
                 Description = other.Description;

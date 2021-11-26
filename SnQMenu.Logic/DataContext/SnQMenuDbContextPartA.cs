@@ -139,7 +139,9 @@ namespace SnQMenu.Logic.DataContext
             modelBuilder.Entity<Entities.Persistence.MasterData.Restaurant>().Property(p => p.RowVersion).IsRowVersion();
             restaurantBuilder.Property(p => p.Guid)
             .IsRequired()
-            .HasMaxLength(36);
+            .HasDefaultValueSql("NEWID()");
+            restaurantBuilder.Property(p => p.ImageUrl)
+            .HasMaxLength(256);
             restaurantBuilder
             .HasIndex(c => c.UniqueName)
             .IsUnique();
@@ -160,7 +162,7 @@ namespace SnQMenu.Logic.DataContext
             modelBuilder.Entity<Entities.Persistence.Food.Menu>().Property(p => p.RowVersion).IsRowVersion();
             menuBuilder.Property(p => p.Guid)
             .IsRequired()
-            .HasMaxLength(36);
+            .HasDefaultValueSql("NEWID()");
             menuBuilder.Property(p => p.Notes)
             .HasMaxLength(1024);
             ConfigureEntityType(menuBuilder);
@@ -175,7 +177,9 @@ namespace SnQMenu.Logic.DataContext
             .HasMaxLength(1024);
             menuItemBuilder.Property(p => p.Guid)
             .IsRequired()
-            .HasMaxLength(36);
+            .HasDefaultValueSql("NEWID()");
+            menuItemBuilder.Property(p => p.ImageUrl)
+            .HasMaxLength(256);
             menuItemBuilder.Property(p => p.InternalName)
             .HasMaxLength(64);
             menuItemBuilder.Property(p => p.AllergenType)
@@ -187,14 +191,14 @@ namespace SnQMenu.Logic.DataContext
             modelBuilder.Entity<Entities.Persistence.Food.MenuSection>().Property(p => p.RowVersion).IsRowVersion();
             menuSectionBuilder.Property(p => p.Guid)
             .IsRequired()
-            .HasMaxLength(36);
+            .HasDefaultValueSql("NEWID()");
+            menuSectionBuilder.Property(p => p.ImageUrl)
+            .HasMaxLength(256);
             menuSectionBuilder.Property(p => p.Name)
             .IsRequired()
             .HasMaxLength(256);
             menuSectionBuilder.Property(p => p.Description)
             .HasMaxLength(1024);
-            menuSectionBuilder.Property(p => p.ImageUrl)
-            .HasMaxLength(256);
             ConfigureEntityType(menuSectionBuilder);
             var accessBuilder = modelBuilder.Entity<Entities.Persistence.Account.Access>();
             accessBuilder.ToTable("Access", "Account")

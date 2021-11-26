@@ -1,0 +1,60 @@
+﻿@*@CustomerCode*@
+@{
+    @using CommonBase.Extensions
+    @using SnQMenu.AspMvc.Models.Modules.Common
+    @using SnQMenu.Contracts.Modules.Common
+    @using SnQMenu.AspMvc.Modules.Handler
+    @using SnQMenu.AspMvc.Modules.Language
+    @using SnQMenu.AspMvc.Modules.Session
+    @using SnQMenu.AspMvc.Modules.View
+    @model IEnumerable<SnQMenu.AspMvc.Models.Business.Food.MenuCard>
+
+    var viewBagWrapper = new ViewBagWrapper(ViewBag);
+    var sessionWrapper = new SessionWrapper(Context.Session);
+    var menuData = Model.Where(e => e.ItemType == MenuCardItemType.RestaurantData);
+
+    viewBagWrapper.Translate = Translator.TranslateIt;
+    viewBagWrapper.Controller = ViewContext.RouteData.Values["controller"].ToString();
+    viewBagWrapper.Action = ViewContext.RouteData.Values["action"].ToString();
+    viewBagWrapper.ViewType = Model != null ? Model.GetType() : null;
+    viewBagWrapper.CommandMode = CommandMode.None;
+
+    ViewData["Title"] = menuData.FirstOrDefault()?.Text;
+
+    @if (string.IsNullOrEmpty(ErrorHandler.LastViewError) == false)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ErrorHandler.GetLastViewErrorAndClear()
+        </div>
+    }
+    else
+    {
+        var contentModels = Model.Where(e => e.State == State.Active && (e.ItemType & MenuCardItemType.ContentType) > 0);
+
+        @foreach (var item in contentModels)
+        {
+            item.ViewBagInfo = viewBagWrapper;
+
+            <div class="card" style="margin-bottom: 1em;">
+                @if (item.ImageUrl.HasContent())
+                {
+                    <img class="card-img-top" src="@item.ImageUrl" alt="Item image">
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@item.Text</h5>
+                    <p class="card-text">@item.SubText</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    @if (item.ItemType == MenuCardItemType.MenuItem)
+                    {
+                        <li class="list-group-item">@item.Price</li>
+                        @if (item.AllergenType.HasContent())
+                        {
+                            <li class="list-group-item"><strong>@($"Alergene: {item.AllergenType}")</strong></li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    }
+}

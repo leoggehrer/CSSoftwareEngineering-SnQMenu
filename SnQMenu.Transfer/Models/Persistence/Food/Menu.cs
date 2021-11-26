@@ -23,12 +23,11 @@ namespace SnQMenu.Transfer.Models.Persistence.Food
             get;
             set;
         }
-        public System.String Guid
+        public System.Guid Guid
         {
             get;
             set;
         }
-        = System.Guid.NewGuid().ToString();
         public System.DateTime? From
         {
             get;

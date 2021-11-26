@@ -1,6 +1,7 @@
 ﻿//@CodeCopy
 //MdStart
 
+using CommonBase.Extensions;
 using CommonBase.Modules.Configuration;
 using SnQMenu.AspMvc.Models.ThirdParty;
 using SnQMenu.AspMvc.Modules.Handler;
@@ -41,8 +42,9 @@ namespace SnQMenu.AspMvc.Modules.Language
 
         public bool HasLoaded => LastLoad.HasValue;
         public DateTime? LastLoad { get; private set; }
-        public LanguageCode KeyLanguage { get; set; } = LanguageCode.En;
-        public LanguageCode ValueLanguage { get; set; } = LanguageCode.De;
+        public string AppName { get; private set; } = nameof(SnQMenu);
+        public LanguageCode KeyLanguage { get; private set; } = LanguageCode.En;
+        public LanguageCode ValueLanguage { get; private set; } = LanguageCode.De;
 
         public IEnumerable<Translation> NoTranslations => noTranslations;
 
@@ -57,7 +59,7 @@ namespace SnQMenu.AspMvc.Modules.Language
                 if (translationServer.HasContent())
                 {
                     var ctrl = Adapters.Factory.CreateThridParty<Contracts.ThirdParty.ITranslation>(translationServer);
-                    var predicate = $"{nameof(Translation.AppName)} == \"{nameof(SnQMenu)}\" AND {nameof(Translation.KeyLanguage)} == \"{KeyLanguage}\" AND {nameof(Translation.ValueLanguage)} == \"{ValueLanguage}\"";
+                    var predicate = $"{nameof(Translation.AppName)} == \"{AppName}\" AND {nameof(Translation.KeyLanguage)} == \"{KeyLanguage}\" AND {nameof(Translation.ValueLanguage)} == \"{ValueLanguage}\"";
 
                     try
                     {
@@ -161,6 +163,14 @@ namespace SnQMenu.AspMvc.Modules.Language
             }
         }
 
+        public static void ChangeAppName(string appName)
+        {
+            if (Instance.AppName != appName)
+            {
+                Instance.Reload = true;
+                Instance.AppName = appName;
+            }
+        }
         public static void ChangeKeyLanguage(LanguageCode languageCode)
         {
             if (Instance.KeyLanguage != languageCode)

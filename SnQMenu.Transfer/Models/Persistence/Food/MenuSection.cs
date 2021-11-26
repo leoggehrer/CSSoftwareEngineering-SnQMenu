@@ -23,23 +23,22 @@ namespace SnQMenu.Transfer.Models.Persistence.Food
             get;
             set;
         }
-        public System.String Guid
+        public System.Guid Guid
         {
             get;
             set;
         }
-        = System.Guid.NewGuid().ToString();
+        public System.String ImageUrl
+        {
+            get;
+            set;
+        }
         public System.String Name
         {
             get;
             set;
         }
         public System.String Description
-        {
-            get;
-            set;
-        }
-        public System.String ImageUrl
         {
             get;
             set;
@@ -69,9 +68,9 @@ namespace SnQMenu.Transfer.Models.Persistence.Food
                 RowVersion = other.RowVersion;
                 MenuId = other.MenuId;
                 Guid = other.Guid;
+                ImageUrl = other.ImageUrl;
                 Name = other.Name;
                 Description = other.Description;
-                ImageUrl = other.ImageUrl;
                 SortOrder = other.SortOrder;
                 State = other.State;
             }

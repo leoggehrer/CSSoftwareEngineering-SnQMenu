@@ -18,12 +18,16 @@ namespace SnQMenu.Transfer.Models.Persistence.MasterData
         }
         partial void Constructing();
         partial void Constructed();
-        public System.String Guid
+        public System.Guid Guid
         {
             get;
             set;
         }
-        = System.Guid.NewGuid().ToString();
+        public System.String ImageUrl
+        {
+            get;
+            set;
+        }
         public System.String UniqueName
         {
             get;
@@ -63,6 +67,7 @@ namespace SnQMenu.Transfer.Models.Persistence.MasterData
                 Id = other.Id;
                 RowVersion = other.RowVersion;
                 Guid = other.Guid;
+                ImageUrl = other.ImageUrl;
                 UniqueName = other.UniqueName;
                 DisplayName = other.DisplayName;
                 Description = other.Description;
