@@ -6,7 +6,7 @@
         {
             AddIgnoreHidden("Guid");
             AddIgnoreHidden("WebsiteText");
-            AddIgnoreHidden("ImageUrl");
+            //AddIgnoreHidden("ImageUrl");
         }
     }
 }

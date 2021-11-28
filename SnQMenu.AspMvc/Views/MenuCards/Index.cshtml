@@ -1,5 +1,8 @@
 ﻿@*@CustomerCode*@
 @{
+    Layout = "_LayoutMenuCard.cshtml";
+}
+@{
     @using CommonBase.Extensions
     @using SnQMenu.AspMvc.Models.Modules.Common
     @using SnQMenu.Contracts.Modules.Common
@@ -47,7 +50,9 @@
                 <ul class="list-group list-group-flush">
                     @if (item.ItemType == MenuCardItemType.MenuItem)
                     {
-                        <li class="list-group-item">@item.Price</li>
+                        var displayValue = $"{item.Price} {item.Currency}";
+
+                        <li class="list-group-item">@displayValue</li>
                         @if (item.AllergenType.HasContent())
                         {
                             <li class="list-group-item"><strong>@($"Alergene: {item.AllergenType}")</strong></li>

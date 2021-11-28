@@ -1,0 +1,41 @@
+﻿@{
+    @using SnQMenu.AspMvc.Models.Business.Food
+    @using SnQMenu.AspMvc.Modules.Handler
+    @using SnQMenu.AspMvc.Modules.Language
+    @using SnQMenu.AspMvc.Modules.Session
+    @using SnQMenu.AspMvc.Modules.View
+
+    var viewBagWrapper = new ViewBagWrapper(ViewBag);
+    var sessionWrapper = new SessionWrapper(Context.Session);
+    var guid = sessionWrapper.GetStringValue(StaticLiterals.Guid);
+    var menuJson = sessionWrapper.GetValue(StaticLiterals.Menues);
+    var languageJson = sessionWrapper.GetValue(StaticLiterals.Languages);
+    var selectLangugeCode = sessionWrapper.GetStringValue(StaticLiterals.SelectLanguageCode);
+    var selectLangugeText = sessionWrapper.GetStringValue(StaticLiterals.SelectLanguageText);
+    var menuItems = System.Text.Json.JsonSerializer.Deserialize<MenuCard[]>(menuJson.ToString());
+    var languageItems = System.Text.Json.JsonSerializer.Deserialize<MenuCard[]>(languageJson.ToString());
+
+    @if (menuItems != null && languageItems != null)
+    {
+        <div class="dropdown ">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>@selectLangugeText</span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right text-left">
+                @foreach (var item in languageItems)
+                {
+                    var action = Url.Action("IndexByIdAndLang", viewBagWrapper.Controller, new { @guid = guid, lang = item.Text });
+
+                    if (selectLangugeCode == item.SubText)
+                    {
+                        <a class="dropdown-item active" href="@action">@item.SubText</a>
+                    }
+                    else
+                    {
+                        <a class="dropdown-item" href="@action">@item.SubText</a>
+                    }
+                }
+            </div>
+        </div>
+    }
+}

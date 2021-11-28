@@ -25,6 +25,7 @@ namespace SnQMenu.Logic.Controllers.Business.Food
 
         private async Task<IEnumerable<IMenuCard>> LoadMenuCardAsync(string predicate)
         {
+            var count = 0;
             var sortOrder = 100;
             var result = new List<IMenuCard>();
             var items = await menuController.Set()
@@ -34,19 +35,20 @@ namespace SnQMenu.Logic.Controllers.Business.Food
                                             .ToArrayAsync()
                                             .ConfigureAwait(false);
 
-            foreach (var item in items)
+            foreach (var item in items.OrderBy(e => e.From))
             {
-                result.AddRange(await LoadMenuDataAsync(item.RestaurantId).ConfigureAwait(false));
+                result.AddRange(await LoadRestaurantDataAsync(item.RestaurantId).ConfigureAwait(false));
 
-                var sectionOrder = 1000;
                 var cardItem = await CreateEntityAsync().ConfigureAwait(false);
+                var currency = result.FirstOrDefault(e => e.ItemType == Contracts.Modules.Common.MenuCardItemType.RestaurantData)?.Currency;
 
+                sortOrder = 100 + (100 * count++);
                 cardItem.Guid = item.Guid;
                 cardItem.Text = item.LanguageCode.ToString();
-                cardItem.SubText = string.Empty;
+                cardItem.SubText = item.LanguageCode.ToString();
                 cardItem.SortOrder = sortOrder++;
-                cardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.MenuLanguage;
                 cardItem.State = item.State;
+                cardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.MenuData;
                 result.Add(cardItem);
 
                 foreach (var section in item.MenuSections.OrderBy(e => e.SortOrder))
@@ -57,11 +59,11 @@ namespace SnQMenu.Logic.Controllers.Business.Food
                     sectionCardItem.ImageUrl = section.ImageUrl;
                     sectionCardItem.Text = section.Name;
                     sectionCardItem.SubText = section.Description;
-                    sectionCardItem.SortOrder = sectionOrder + section.SortOrder;
-                    sectionCardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.MenuSection;
+                    sectionCardItem.SortOrder = sortOrder++;
                     sectionCardItem.State = section.State;
+                    sectionCardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.MenuSection;
                     result.Add(sectionCardItem);
-                    foreach (var menu in section.MenuItems)
+                    foreach (var menu in section.MenuItems.OrderBy(e => e.SortOrder))
                     {
                         var menuItem = await CreateEntityAsync().ConfigureAwait(false);
 
@@ -70,18 +72,19 @@ namespace SnQMenu.Logic.Controllers.Business.Food
                         menuItem.Text = menu.Name;
                         menuItem.SubText = menu.Description;
                         menuItem.Price = menu.Price;
-                        menuItem.SortOrder = sectionOrder * 10 + section.SortOrder;
-                        menuItem.ItemType = Contracts.Modules.Common.MenuCardItemType.MenuItem;
+                        menuItem.Currency = currency;
+                        menuItem.SortOrder = sortOrder++;
                         menuItem.State = menu.State;
+                        menuItem.ItemType = Contracts.Modules.Common.MenuCardItemType.MenuItem;
                         result.Add(menuItem);
                     }
-                    sectionOrder += 1000;
                 }
             }
             return result;
         }
-        private async Task<IEnumerable<IMenuCard>> LoadMenuDataAsync(int restaurantId)
+        private async Task<IEnumerable<IMenuCard>> LoadRestaurantDataAsync(int restaurantId)
         {
+            var count = 0;
             var sortOrder = 1;
             var result = new List<IMenuCard>();
             var items = await restaurantController.Set()
@@ -94,13 +97,15 @@ namespace SnQMenu.Logic.Controllers.Business.Food
             {
                 var cardItem = await CreateEntityAsync().ConfigureAwait(false);
 
+                sortOrder = 1 + (1000 * count++);
                 cardItem.Guid = item.Guid;
                 cardItem.ImageUrl = item.ImageUrl;
                 cardItem.Text = item.DisplayName;
                 cardItem.SubText = item.WebsiteText;
+                cardItem.Currency = "EUR";
                 cardItem.SortOrder = sortOrder++;
-                cardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.RestaurantData;
                 cardItem.State = item.State;
+                cardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.RestaurantData;
                 result.Add(cardItem);
                 foreach (var language in item.AvailableLanguages)
                 {
@@ -110,8 +115,8 @@ namespace SnQMenu.Logic.Controllers.Business.Food
                     langCardItem.Text = language.LanguageCode.ToString();
                     langCardItem.SubText = language.Text;
                     langCardItem.SortOrder = sortOrder++;
-                    langCardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.AvailableLanguage;
                     langCardItem.State = Contracts.Modules.Common.State.Active;
+                    langCardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.AvailableLanguage;
                     result.Add(langCardItem);
                 }
             }

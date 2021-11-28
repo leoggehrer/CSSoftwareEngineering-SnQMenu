@@ -1,0 +1,18 @@
+﻿@*@CustomerCode*@
+@{
+    @model SnQMenu.AspMvc.Models.IdentityModel
+    var viewBagWrapper = Model.ViewBagInfo;
+    var property = viewBagWrapper.DisplayProperty;
+
+    @if (property.Name.Equals("ImageUrl"))
+    {
+        var displayViewModel = viewBagWrapper.CreateDisplayViewModel(Model);
+        var value = displayViewModel.GetDisplayValue(property);
+
+        viewBagWrapper.Handled = true;
+        //if (string.IsNullOrEmpty(value) == false)
+        //{
+        //    <img class="card-img-top" src="@value" alt="Item image">
+        //}
+    }
+}

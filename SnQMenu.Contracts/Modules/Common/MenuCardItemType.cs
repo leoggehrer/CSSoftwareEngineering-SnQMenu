@@ -5,9 +5,8 @@
         RestaurantData = 1,
         MenuData = 2,
         AvailableLanguage = 4,
-        MenuLanguage = 8,
-        MenuSection = 16,
-        MenuItem = 32,
+        MenuSection = 8,
+        MenuItem = 16,
         ContentType = RestaurantData + MenuSection + MenuItem,
     }
 }
