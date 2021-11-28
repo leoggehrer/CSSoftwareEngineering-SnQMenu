@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SnQMenu.Logic.Entities.Persistence.MasterData.AvailableLanguage">
-    <Position X="2.75" Y="5.5" Width="2.25" />
+    <Position X="2.75" Y="5.5" Width="1.75" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -20,7 +20,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAEAAgABAgAAAAgFEAARAAAAAABNAgJAIAFAAAAAA=</HashCode>
+      <HashCode>AAAAUAAgABAgAAAAgFEAARAAAAAABNAgJAIAFAAAAAA=</HashCode>
       <FileName>Entities\Persistence\MasterData\Restaurant.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -43,21 +43,21 @@
     <ShowAsCollectionAssociation>
       <Property Name="MenuItems" />
     </ShowAsCollectionAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SnQMenu.Logic.Entities.Persistence.Food.MenuItem" BaseTypeListCollapsed="true">
-    <Position X="9" Y="2" Width="1.5" />
+    <Position X="9" Y="1.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAABAAAAQAgAAAAglEAARQAAAAAANAgBAAAFAAAQEA=</HashCode>
+      <HashCode>AAAARAAAAQAgAAAAglEAARQAAAAABNAgBAAAFAAAQEA=</HashCode>
       <FileName>Entities\Persistence\Food\MenuItem.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="MenuSection" />
     </ShowAsAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SnQMenu.Logic.Entities.Persistence.Food.Menu" BaseTypeListCollapsed="true">
     <Position X="5" Y="1.5" Width="1.5" />
@@ -66,7 +66,7 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>IgAgAAAAAAAAAAAAgFEAARAAAAAIBNAgBAAEFAAEAEA=</HashCode>
-      <FileName>Entities\Persistence\Food\MenuInheritance.cs</FileName>
+      <FileName>Entities\Persistence\Food\Menu.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Restaurant" />
@@ -74,7 +74,7 @@
     <ShowAsCollectionAssociation>
       <Property Name="MenuSections" />
     </ShowAsCollectionAssociation>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
