@@ -104,6 +104,7 @@ namespace SnQMenu.Logic.Controllers.Business.Food
                 cardItem.SubText = item.WebsiteText;
                 cardItem.Currency = "EUR";
                 cardItem.SortOrder = sortOrder++;
+                cardItem.Tag = item.UniqueName;
                 cardItem.State = item.State;
                 cardItem.ItemType = Contracts.Modules.Common.MenuCardItemType.RestaurantData;
                 result.Add(cardItem);

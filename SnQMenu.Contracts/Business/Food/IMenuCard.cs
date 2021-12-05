@@ -13,6 +13,7 @@ namespace SnQMenu.Contracts.Business.Food
         string Currency { get; set; }
         string AllergenType { get; set; }
         int SortOrder { get; set; }
+        string Tag { get; set; }
         State State { get; set; }
         MenuCardItemType ItemType { get; set; }
     }

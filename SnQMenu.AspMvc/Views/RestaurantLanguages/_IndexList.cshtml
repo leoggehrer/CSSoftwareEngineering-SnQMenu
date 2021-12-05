@@ -8,42 +8,40 @@
     @using SnQMenu.AspMvc.Modules.View
     @model IEnumerable<SnQMenu.AspMvc.Models.IdentityModel>
 
-    var viewBagWrapper = new ViewBagWrapper(ViewBag);
-    var sessionWrapper = new SessionWrapper(Context.Session);
+    var viewBagInfo = new ViewBagWrapper(ViewBag);
+    var sessionInfo = new SessionWrapper(Context.Session);
 
-    viewBagWrapper.Translate = Translator.TranslateIt;
-    viewBagWrapper.Controller = ViewContext.RouteData.Values["controller"].ToString();
-    viewBagWrapper.Action = ViewContext.RouteData.Values["action"].ToString();
+    viewBagInfo.Translate = Translator.TranslateIt;
+    viewBagInfo.Controller = ViewContext.RouteData.Values["controller"].ToString();
+    viewBagInfo.Action = ViewContext.RouteData.Values["action"].ToString();
 
     var indexViewModel = default(IndexViewModel);
 
-    if (Model is IEnumerable<IMasterDetails> mds)
-    {
-        var models = mds.Select(m => m.Master);
+    //if (Model is IEnumerable<IMasterDetails> mds)
+    //{
+    //    var models = mds.Select(m => m.Master);
 
-        if (models.Any())
-        {
-            indexViewModel = viewBagWrapper.CreateIndexViewModel(models);
-        }
-        viewBagWrapper.ModelType = ModelType.MasterDetail;
-        viewBagWrapper.CommandMode |= SnQMenu.AspMvc.Models.Modules.Common.CommandMode.CreateDetail;
-    }
-    else
-    {
-        viewBagWrapper.ModelType = ModelType.Single;
-        indexViewModel = viewBagWrapper.CreateIndexViewModel(Model);
-    }
+    //    if (models.Any())
+    //    {
+    //        indexViewModel = viewBagInfo.CreateIndexViewModel(models);
+    //    }
+    //    viewBagInfo.CommandMode |= SnQMenu.AspMvc.Models.Modules.Common.CommandMode.CreateDetail;
+    //}
+    //else
+    //{
+    //    indexViewModel = viewBagInfo.CreateIndexViewModel(Model);
+    //}
 
     if (indexViewModel != null)
     {
         @foreach (var model in indexViewModel.Models)
         {
-            model.ViewBagInfo = viewBagWrapper;
+            model.ViewBagInfo = viewBagInfo;
             <div class="card" style="margin-bottom: 1em;">
                 <ul class="list-group list-group-flush">
                     @foreach (var item in indexViewModel.GetDisplayProperties())
                     {
-                        <li class="list-group-item"><strong>@viewBagWrapper.TranslateFor(indexViewModel.GetLabel(item))</strong><p>@indexViewModel.GetDisplayValue(model, item)</p></li>
+                        <li class="list-group-item"><strong>@viewBagInfo.TranslateFor(indexViewModel.GetLabel(item))</strong><p>@indexViewModel.GetDisplayValue(model, item)</p></li>
                     }
                 </ul>
                 <div class="card-body">

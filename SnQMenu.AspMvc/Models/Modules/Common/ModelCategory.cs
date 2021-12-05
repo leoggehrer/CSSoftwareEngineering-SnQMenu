@@ -2,7 +2,7 @@
 //MdStart
 namespace SnQMenu.AspMvc.Models.Modules.Common
 {
-    public enum ModelType : int
+    public enum ModelCategory : int
     {
         Single = 1,
         OneToAnother = 2,

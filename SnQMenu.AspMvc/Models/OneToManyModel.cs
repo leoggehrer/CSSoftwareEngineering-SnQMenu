@@ -67,7 +67,7 @@ namespace SnQMenu.AspMvc.Models
         {
             ManyModels.Clear();
         }
-        public virtual TManyModel CreateManyModel() => new TManyModel();
+        public virtual TManyModel CreateManyModel() => new();
         public virtual TManyModel GetManyModelById(int id) => ManyModels.FirstOrDefault(x => x.Id == id);
         public void RemoveManyModel(int id)
         {
@@ -88,6 +88,15 @@ namespace SnQMenu.AspMvc.Models
         public IdentityModel CreateDetail() => new TManyModel();
         public void AddDetail(IdentityModel model) => ManyModels.Add(model as TManyModel);
         public void RemoveDetail(IdentityModel model) => ManyModels.Remove(model as TManyModel);
+        public void RemoveDetailById(int id)
+        {
+            var manyModel = ManyModels.FirstOrDefault(e => e.Id == id);
+            
+            if (manyModel != null)
+            {
+                ManyModels.Remove(manyModel);
+            }
+        }
     }
 }
 //MdEnd
