@@ -1,18 +1,17 @@
 ﻿@*@CustomerCode*@
 @{
-    @using CommonBase.Extensions
+    @using SnQMenu.AspMvc.Models.Modules.View
     @using SnQMenu.AspMvc.Modules.View
-    @model SnQMenu.AspMvc.Models.IdentityModel
+    @model EditViewModel
 
     var viewBagInfo = Model.ViewBagInfo;
     var property = viewBagInfo.DisplayProperty;
-    var editViewModel = ViewModelCreator.CreateEditViewModel(viewBagInfo, Model);
 
     @if (property.Name.Equals("Description")
-         || property.Name.Equals("WebsiteText"))
+        || property.Name.Equals("WebsiteText"))
     {
         viewBagInfo.Handled = true;
-        @Html.TextArea(editViewModel.GetName(property), editViewModel.GetDisplayValue(property), 4, 1, new { @class = "form-control" })    
+        @Html.TextArea(Model.GetName(property), Model.GetDisplayValue(property), 4, 1, new { @class = "form-control" })
     }
     else
     {
