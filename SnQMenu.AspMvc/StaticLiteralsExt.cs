@@ -8,6 +8,7 @@
         public static string MenuLanguageCode => "MenuLanguageCode";
         public static string SelectLanguageCode => "SelectLanguageCode";
         public static string SelectLanguageText => "SelectLanguageText";
-        public static string RestaurantDisplayName => "RestaurantDisplayName";
+        public static string RestaurantUniqueName => "RestaurantUniqueName";
+        //public static string RestaurantDisplayName => "RestaurantDisplayName";
     }
 }

@@ -17,7 +17,7 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
             var menuLangugeCode = string.Empty;
             var selectLangugeCode = string.Empty;
             var selectLangugeText = string.Empty;
-            var restaurantDisplayName = string.Empty;
+            var restaurantUniqueName = string.Empty;
             var restaurants = models.Where(e => e.ItemType == MenuCardItemType.RestaurantData).ToArray();
             var menues = models.Where(e => e.ItemType == MenuCardItemType.MenuData).ToArray();
             var languages = models.Where(e => e.ItemType == MenuCardItemType.AvailableLanguage).ToArray();
@@ -60,7 +60,7 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
                     selectLangugeText = item?.SubText;
                 }
             }
-            restaurantDisplayName = restaurants.FirstOrDefault()?.Text;
+            restaurantUniqueName = restaurants.FirstOrDefault()?.Tag;
 
             SessionWrapper.SetPageSizes(ControllerName, new int[] { 1000 });
             SessionWrapper.SetStringValue(StaticLiterals.Guid, guid);
@@ -69,7 +69,7 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
             SessionWrapper.SetStringValue(StaticLiterals.MenuLanguageCode, menuLangugeCode);
             SessionWrapper.SetStringValue(StaticLiterals.SelectLanguageCode, selectLangugeCode);
             SessionWrapper.SetStringValue(StaticLiterals.SelectLanguageText, selectLangugeText);
-            SessionWrapper.SetStringValue(StaticLiterals.RestaurantDisplayName, restaurantDisplayName);
+            SessionWrapper.SetStringValue(StaticLiterals.RestaurantUniqueName, restaurantUniqueName);
         }
 
         [HttpGet]
@@ -126,9 +126,9 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
             var result = new List<TModel>();
             var menuLangugeCode = SessionWrapper.GetStringValue(StaticLiterals.MenuLanguageCode, string.Empty);
             var selectLangugeCode = SessionWrapper.GetStringValue(StaticLiterals.SelectLanguageCode, string.Empty);
-            var restaurantDisplayName = SessionWrapper.GetStringValue(StaticLiterals.RestaurantDisplayName, string.Empty);
+            var restaurantUniqueName = SessionWrapper.GetStringValue(StaticLiterals.RestaurantUniqueName, string.Empty);
 
-            if (restaurantDisplayName.HasContent() 
+            if (restaurantUniqueName.HasContent() 
                 && menuLangugeCode.HasContent()
                 && selectLangugeCode.HasContent()
                 && menuLangugeCode != selectLangugeCode)
@@ -136,9 +136,10 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
                 var menuCode = (LanguageCode)Enum.Parse(typeof(LanguageCode), menuLangugeCode);
                 var selectCode = (LanguageCode)Enum.Parse(typeof(LanguageCode), selectLangugeCode);
 
-                Translator.ChangeAppName(restaurantDisplayName);
+                Translator.ChangeAppName(restaurantUniqueName);
                 Translator.ChangeKeyLanguage(menuCode);
                 Translator.ChangeValueLanguage(selectCode);
+                Translator.Instance.ReloadTranslations();
 
                 foreach (var item in models)
                 {
