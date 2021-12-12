@@ -12,6 +12,10 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
 {
     partial class MenuCardsController
     {
+        partial void Constructed()
+        {
+            CheckSessionToken = false;
+        }
         private void SetSessionData(string guid, string lang, IEnumerable<TModel> models)
         {
             var menuLangugeCode = string.Empty;
@@ -62,14 +66,14 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
             }
             restaurantUniqueName = restaurants.FirstOrDefault()?.Tag;
 
-            SessionWrapper.SetPageSizes(ControllerName, new int[] { 1000 });
-            SessionWrapper.SetStringValue(StaticLiterals.Guid, guid);
-            SessionWrapper.SetValue(StaticLiterals.Menues, menues);
-            SessionWrapper.SetValue(StaticLiterals.Languages, languages);
-            SessionWrapper.SetStringValue(StaticLiterals.MenuLanguageCode, menuLangugeCode);
-            SessionWrapper.SetStringValue(StaticLiterals.SelectLanguageCode, selectLangugeCode);
-            SessionWrapper.SetStringValue(StaticLiterals.SelectLanguageText, selectLangugeText);
-            SessionWrapper.SetStringValue(StaticLiterals.RestaurantUniqueName, restaurantUniqueName);
+            SessionInfo.SetPageSizes(ControllerName, new int[] { 1000 });
+            SessionInfo.SetStringValue(StaticLiterals.Guid, guid);
+            SessionInfo.SetValue(StaticLiterals.Menues, menues);
+            SessionInfo.SetValue(StaticLiterals.Languages, languages);
+            SessionInfo.SetStringValue(StaticLiterals.MenuLanguageCode, menuLangugeCode);
+            SessionInfo.SetStringValue(StaticLiterals.SelectLanguageCode, selectLangugeCode);
+            SessionInfo.SetStringValue(StaticLiterals.SelectLanguageText, selectLangugeText);
+            SessionInfo.SetStringValue(StaticLiterals.RestaurantUniqueName, restaurantUniqueName);
         }
 
         [HttpGet]
@@ -124,9 +128,9 @@ namespace SnQMenu.AspMvc.Controllers.Business.Food
         protected override IEnumerable<TModel> BeforeView(IEnumerable<TModel> models, ActionMode action)
         {
             var result = new List<TModel>();
-            var menuLangugeCode = SessionWrapper.GetStringValue(StaticLiterals.MenuLanguageCode, string.Empty);
-            var selectLangugeCode = SessionWrapper.GetStringValue(StaticLiterals.SelectLanguageCode, string.Empty);
-            var restaurantUniqueName = SessionWrapper.GetStringValue(StaticLiterals.RestaurantUniqueName, string.Empty);
+            var menuLangugeCode = SessionInfo.GetStringValue(StaticLiterals.MenuLanguageCode, string.Empty);
+            var selectLangugeCode = SessionInfo.GetStringValue(StaticLiterals.SelectLanguageCode, string.Empty);
+            var restaurantUniqueName = SessionInfo.GetStringValue(StaticLiterals.RestaurantUniqueName, string.Empty);
 
             if (restaurantUniqueName.HasContent() 
                 && menuLangugeCode.HasContent()
