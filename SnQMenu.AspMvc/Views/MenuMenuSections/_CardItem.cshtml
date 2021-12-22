@@ -1,15 +1,16 @@
 ﻿@*@CustomerCode*@
 @{
+    @using SnQMenu.AspMvc.Models.Modules.Common
+    @using SnQMenu.AspMvc.Models.Modules.View
     @using SnQMenu.AspMvc.Modules.View
-    @model SnQMenu.AspMvc.Models.IdentityModel
+    @model IDisplayViewModel
 
     var viewBagInfo = Model.ViewBagInfo;
     var property = viewBagInfo.DisplayProperty;
 
     @if (property.Name.Equals("ImageUrl"))
     {
-        var displayViewModel = ViewModelCreator.CreateDisplayViewModel(viewBagInfo, Model);
-        var value = displayViewModel.GetDisplayValue(property);
+        var value = Model.GetDisplayValue(property);
 
         viewBagInfo.Handled = true;
         //if (string.IsNullOrEmpty(value) == false)

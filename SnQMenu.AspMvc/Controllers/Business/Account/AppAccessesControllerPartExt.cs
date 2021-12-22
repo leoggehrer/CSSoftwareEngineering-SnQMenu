@@ -1,14 +1,11 @@
 ﻿//@CodeCopy
 //MdStart
 #if ACCOUNT_ON
-using CommonBase.Extensions;
-using Microsoft.AspNetCore.Mvc.Filters;
 using SnQMenu.AspMvc.Models;
 using SnQMenu.AspMvc.Models.Business.Account;
 using SnQMenu.AspMvc.Models.Modules.Common;
 using SnQMenu.AspMvc.Models.Persistence.Account;
 using SnQMenu.AspMvc.Modules.View;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

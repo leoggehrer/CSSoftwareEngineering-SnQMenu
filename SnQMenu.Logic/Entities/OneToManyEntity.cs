@@ -1,6 +1,5 @@
 ﻿//@CodeCopy
 //MdStart
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SnQMenu.Logic.Entities

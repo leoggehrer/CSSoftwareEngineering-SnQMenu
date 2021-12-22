@@ -10,7 +10,6 @@ using SnQMenu.Logic.Entities.Persistence.Account;
 using SnQMenu.Logic.Modules.Exception;
 using SnQMenu.Logic.Modules.Security;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;

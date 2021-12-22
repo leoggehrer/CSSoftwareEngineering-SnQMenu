@@ -1,9 +1,7 @@
 ﻿//@CodeCopy
 //MdStart
-using CommonBase.Extensions;
 using SnQMenu.AspMvc.Models.Modules.View;
 using System;
-using System.Collections.Generic;
 
 namespace SnQMenu.AspMvc.Modules.View
 {

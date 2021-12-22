@@ -1,6 +1,5 @@
 ﻿//@CodeCopy
 //MdStart
-using CommonBase.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -8,12 +7,10 @@ using SnQMenu.AspMvc.Models.Modules.Csv;
 using SnQMenu.AspMvc.Modules.Language;
 using SnQMenu.AspMvc.Modules.Session;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SnQMenu.AspMvc.Controllers
 {
@@ -103,7 +100,7 @@ namespace SnQMenu.AspMvc.Controllers
 
                     if (value != null)
                     {
-                        exportLine.Append(value.ToString());
+                        exportLine.Append(value.ToString().Remove("\r", string.Empty));
                     }
                     else
                     {

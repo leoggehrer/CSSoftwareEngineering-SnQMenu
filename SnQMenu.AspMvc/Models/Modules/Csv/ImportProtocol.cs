@@ -1,8 +1,6 @@
 ﻿//@CodeCopy
 //MdStart
 
-using System.Collections.Generic;
-
 namespace SnQMenu.AspMvc.Models.Modules.Csv
 {
     public class ImportProtocol : ModelObject

@@ -4,7 +4,6 @@
 using SnQMenu.Contracts.Persistence.Account;
 using SnQMenu.Logic.Modules.Security;
 using System;
-using System.Collections.Generic;
 
 namespace SnQMenu.Logic.Entities.Persistence.Account
 {

@@ -3,7 +3,6 @@
 #if ACCOUNT_ON
 using SnQMenu.Contracts.Client;
 using SnQMenu.Contracts.Persistence.Account;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SnQMenu.Logic.Modules.Account
